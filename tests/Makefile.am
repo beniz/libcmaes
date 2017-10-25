@@ -1,5 +1,5 @@
 AUTOMAKE_OPTIONS = subdir-objects
-bin_PROGRAMS=simple_test edm
+bin_PROGRAMS=simple_test edm par_test
 if HAVE_GFLAGS
 bin_PROGRAMS += test_functions tpa_tests
 if HAVE_SURROG
@@ -11,6 +11,7 @@ tpa_tests_SOURCES=tpa-tests.cc
 endif
 simple_test_SOURCES=simple-test.cc
 edm_SOURCES=edm.cc
+par_test_SOURCES=par-test.cc
 if HAVE_BBOB
 libbbobdir = $(libdir)
 libbbob_LIBRARIES=libbbob.a
@@ -34,6 +35,11 @@ AM_CXXFLAGS += -fopenmp
 endif
 AM_LDFLAGS=-L../src
 LDADD=-lcmaes -lm $(GLOG_LIBS) $(GFLAGS_LIBS)
+if HAVE_TBB
+AM_CPPFLAGS += -I$(TBB_INC) -DHAVE_TBB
+AM_LDFLAGS += -L$(TBB_LIB)
+LDADD += -ltbb
+endif
 if HAVE_BBOB
 AM_CPPFLAGS += -Ibbob.v13.09/c
 AM_LDFLAGS += -L.

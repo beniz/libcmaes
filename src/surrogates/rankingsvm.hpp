@@ -270,6 +270,7 @@ class RankingSVM
 	  double fact = _udist(_rng);
 	  _alpha(i) = _C(i) * (0.95 + 0.05*fact);
 	}
+
 #pragma omp for
       for (int i=0;i<_dKij.rows();i++)
 	{

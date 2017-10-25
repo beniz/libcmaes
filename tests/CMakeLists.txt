@@ -12,4 +12,5 @@ macro (cmaes_add_test name)
 endmacro ()
 
 cmaes_add_test (simple-test)
+cmaes_add_test (par-test)
 cmaes_add_test (edm)
